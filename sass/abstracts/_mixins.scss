@@ -1,0 +1,63 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absoluteCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Media Query Manager
+
+/*
+
+0 - 600px :           Phone devices
+600px - 900px :       Tablet portrait
+900px - 1200px :      Tablet landscape
+[1200px - 1800px] :   Is where our normal styles apply --> Laptop, Desktop
+1800px +  :           Big Desktop
+
+$breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+Order: Base + Typography --> General layout + gtid --> page layout --> components
+
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    // 37.5em = 600px (1em = 16px)
+    @media (max-width: 37.5em) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-port {
+    // 56.25em = 900px (1em = 16px)
+    @media (max-width: 56.25em) {
+      //
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    // 75em = 1200px (1em = 16px)
+    @media (max-width: 75em) {
+      //
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    // 112.5em = 1800px (1em = 16px)
+    @media (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
